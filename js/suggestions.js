@@ -23,6 +23,10 @@ let suggestions = [
     "How to became Web Designer",
     "How to start Gaming Channel",
     "How to start YouTube Channel",
+    "How to learn JavaScript",
+    "How to became Freelancer",
+    "How to became Web Designer",
+    "How to start Gaming Channel",
     "What does HTML stands for?",
     "What does CSS stands for?",
 ];

@@ -50,8 +50,7 @@ body{
   opacity: 0;
   pointer-events: none;
   max-height: 280px;
-
-  
+  overflow-y: auto;
 }
 
 .search-input.active .autocom-box{
@@ -90,6 +89,8 @@ body{
   color: #644bff;
   cursor: pointer;
 }
+
+
 
 
 /* Notes Section */
