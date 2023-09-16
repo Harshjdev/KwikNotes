@@ -8,6 +8,7 @@ let suggestions = [
     "java programming",
     "Javascript",
     "Maths",
+    "new",
     "English",
     "Contact",
     "Freelancer",

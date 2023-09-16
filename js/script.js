@@ -1,4 +1,3 @@
-// getting all required elements
 const searchWrapper = document.querySelector(".search-input");
 const inputBox = searchWrapper.querySelector("input");
 const suggBox = searchWrapper.querySelector(".autocom-box");
@@ -6,54 +5,89 @@ const icon = searchWrapper.querySelector(".icon");
 let linkTag = searchWrapper.querySelector("a");
 let webLink;
 
-// if user press any key and release
-inputBox.onkeyup = (e)=>{
-    let userData = e.target.value; //user enetered data
+// Your suggested input keywords
+const suggestions = ["Operating system", "python", "new"]; // Add your keywords here
+
+inputBox.onkeyup = (e) => {
+    let userData = e.target.value.toLowerCase();
     let emptyArray = [];
-    if(userData){
-        icon.onclick = ()=>{
-            webLink = `https://www.google.com/search?q=${userData}`;
-            linkTag.setAttribute("href", webLink);
-            linkTag.click();
-        }
-        emptyArray = suggestions.filter((data)=>{
-            //filtering array value and user characters to lowercase and return only those words which are start with user enetered chars
-            return data.toLocaleLowerCase().startsWith(userData.toLocaleLowerCase());
+
+    if (userData.trim() !== "") {
+        emptyArray = suggestions.filter((data) => {
+            return data.toLowerCase().startsWith(userData);
         });
-        emptyArray = emptyArray.map((data)=>{
-            // passing return data inside li tag
-            return data = `<li>${data}</li>`;
+
+        emptyArray = emptyArray.map((data) => {
+            return `<li>${data}</li>`;
         });
-        searchWrapper.classList.add("active"); //show autocomplete box
+
+        searchWrapper.classList.add("active");
         showSuggestions(emptyArray);
+
         let allList = suggBox.querySelectorAll("li");
         for (let i = 0; i < allList.length; i++) {
-            //adding onclick attribute in all li tag
-            allList[i].setAttribute("onclick", "select(this)");
+            allList[i].addEventListener("click", (e) => {
+                e.stopPropagation(); // Prevent the click event from propagating to the inputBox
+                select(allList[i].textContent);
+            });
         }
-    }else{
-        searchWrapper.classList.remove("active"); //hide autocomplete box
+
+        // Hide unmatched cards
+        hideUnmatchedCards(userData);
+    } else {
+        searchWrapper.classList.remove("active");
+        suggBox.innerHTML = "";
+        // If the search input is empty, show all cards
+        showAllCards();
     }
 }
 
-function select(element){
-    let selectData = element.textContent;
-    inputBox.value = selectData;
-    icon.onclick = ()=>{
-        webLink = `https://www.google.com/search?q=${selectData}`;
-        linkTag.setAttribute("href", webLink);
-        linkTag.click();
-    }
+function select(elementText) {
+    inputBox.value = elementText;
     searchWrapper.classList.remove("active");
+
+    // Show only the relevant card
+    const selectedCard = document.querySelector(`#card${suggestions.indexOf(elementText) + 1}`);
+    const cards = document.querySelectorAll(".notecard");
+    cards.forEach((card) => {
+        if (card !== selectedCard) {
+            card.style.display = "none";
+        }
+    });
+
+    // Show the selected card
+    if (selectedCard) {
+        selectedCard.style.display = "block";
+    } else {
+        // If no matching card is found, show "Search not found"
+        document.querySelector(".search-not-found").style.display = "block";
+    }
 }
 
-function showSuggestions(list){
-    let listData;
-    if(!list.length){
-        userValue = inputBox.value;
-        listData = `<li>${userValue}</li>`;
-    }else{
-      listData = list.join('');
-    }
+function showSuggestions(list) {
+    let listData = list.length ? list.join('') : "<li>No suggestions found</li>";
     suggBox.innerHTML = listData;
+}
+
+function hideAllCards() {
+    // Hide all cards
+    const cards = document.querySelectorAll(".notecard");
+    cards.forEach((card) => card.style.display = "none");
+}
+
+function showAllCards() {
+    // Show all cards
+    const cards = document.querySelectorAll(".notecard");
+    cards.forEach((card) => card.style.display = "block");
+}
+
+function hideUnmatchedCards(userInput) {
+    // Hide cards that don't contain the user's input
+    const cards = document.querySelectorAll(".notecard");
+    cards.forEach((card) => {
+        const cardContent = card.textContent.toLowerCase();
+        if (!cardContent.includes(userInput)) {
+            card.style.display = "none";
+        }
+    });
 }
