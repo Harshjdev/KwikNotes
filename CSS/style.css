@@ -1,4 +1,5 @@
 /* SearchBar Section */
+@import url('https://fonts.googleapis.com/css2?family=Teko:wght@300&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
 *{
   margin: 0;
@@ -8,7 +9,7 @@
 }
 
 body{
-  background: rgba(214, 214, 228, 0.486);
+  background: rgba(255, 255, 255, 0.486);
   padding: 0 20px;
 }
 
@@ -18,8 +19,8 @@ body{
 }
 
 .wrapper{
-  max-width: 450px;
-  margin: 150px auto;
+  max-width: 550px;
+  margin: 50px auto;
 }
 
 .wrapper .search-input{
@@ -89,20 +90,125 @@ body{
   color: #644bff;
   cursor: pointer;
 }
+/* CSS for the "Search not found" message */
+.search-not-found {
+  text-align: center;
+  font-size: 18px;
+  color: #FF0000; /* Customize the color as needed */
+  padding: 10px;
+  background-color: #f8f8e7;
+  display: none;
+}
 
-
-
+.intro {
+  margin: 0;
+  padding: 0;
+}
 
 /* Notes Section */
 .notecard{
-    box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
     border: 0;
     border-radius: 0.5rem;
+    cursor: pointer;
+    transition: 0.5s ease-in-out;
+}
+.notecard:hover{
+  transform: scale(1.08);
 }
 .subname{
     text-decoration:none;
     
 }
-.cardss{
+/* .cardss{
     display: flex;
+} */
+/* nav */
+a {
+  text-decoration: none;
+}
+
+nav {
+	font-family: monospace;
+}
+
+ul {
+  background: darkorange;
+	list-style: none;
+	margin: 0;
+	padding-left: 0;
+}
+
+li {
+	color: #000000;
+  background: rgb(255, 255, 255);
+	display: block;
+	float: left;
+	padding: 1rem;
+	position: relative;
+	text-decoration: none;
+  transition-duration: 0.5s;
+}
+  
+li a {
+  color: #000000;
+}
+
+li:hover {
+	background: rgb(255, 255, 255);
+	cursor: pointer;
+}
+
+ul li ul {
+	background: rgb(255, 255, 255);
+	visibility: hidden;
+  opacity: 0;
+  min-width: 5rem;
+	position: absolute;
+  transition: all 0.5s ease;
+  margin-top: 1rem;
+	left: 0;
+  display: none;
+}
+
+ul li:hover > ul,
+ul li ul:hover {
+  visibility: visible;
+  opacity: 1;
+  display: block;
+}
+
+ul li ul li {
+	clear: both;
+  width: 100%;
+}
+.abhead{
+  font-family: 'Teko', sans-serif;
+}
+.green{
+  color:rgba(0,163,136,255);
+}
+.bggreen{
+  background-color: rgba(0,163,136,255);;
+}
+/* counter */
+.bg{
+  background-color: #1e1f26;
+  height: 100vh;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.level{
+  background-color: #00d1b2;
+  padding: 5rem 0;
+  color: #ffffff;
+  margin: 0!important;
+}
+
+.title{
+  color: inherit;
+  width: 200px;
+  height: 36px;
 }
