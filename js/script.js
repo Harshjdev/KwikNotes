@@ -32,8 +32,8 @@ inputBox.onkeyup = (e) => {
             });
         }
 
-        // Hide unmatched cards
-        hideUnmatchedCards(userData);
+        // Show only the relevant card that matches the input
+        showMatchingCard(userData);
     } else {
         searchWrapper.classList.remove("active");
         suggBox.innerHTML = "";
@@ -46,33 +46,13 @@ function select(elementText) {
     inputBox.value = elementText;
     searchWrapper.classList.remove("active");
 
-    // Show only the relevant card
-    const selectedCard = document.querySelector(`#card${suggestions.indexOf(elementText) + 1}`);
-    const cards = document.querySelectorAll(".notecard");
-    cards.forEach((card) => {
-        if (card !== selectedCard) {
-            card.style.display = "none";
-        }
-    });
-
-    // Show the selected card
-    if (selectedCard) {
-        selectedCard.style.display = "block";
-    } else {
-        // If no matching card is found, show "Search not found"
-        document.querySelector(".search-not-found").style.display = "block";
-    }
+    // Show only the relevant card that matches the input
+    showMatchingCard(inputBox.value.toLowerCase());
 }
 
 function showSuggestions(list) {
     let listData = list.length ? list.join('') : "<li>No suggestions found</li>";
     suggBox.innerHTML = listData;
-}
-
-function hideAllCards() {
-    // Hide all cards
-    const cards = document.querySelectorAll(".notecard");
-    cards.forEach((card) => card.style.display = "none");
 }
 
 function showAllCards() {
@@ -81,13 +61,11 @@ function showAllCards() {
     cards.forEach((card) => card.style.display = "block");
 }
 
-function hideUnmatchedCards(userInput) {
-    // Hide cards that don't contain the user's input
+function showMatchingCard(userInput) {
     const cards = document.querySelectorAll(".notecard");
     cards.forEach((card) => {
         const cardContent = card.textContent.toLowerCase();
-        if (!cardContent.includes(userInput)) {
-            card.style.display = "none";
-        }
+        card.style.display = cardContent.includes(userInput) ? "block" : "none";
     });
 }
+
