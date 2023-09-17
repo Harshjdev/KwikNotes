@@ -1,4 +1,4 @@
-let suggestions = [
+const suggestions = [
     "Computer Graphics",
     "Computer Networks",
     "Data Structures and algorithms",
@@ -15,3 +15,5 @@ let suggestions = [
     "Information Technology",
     "Web Development",
 ];
+
+export default suggestions;

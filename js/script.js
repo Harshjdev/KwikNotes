@@ -6,13 +6,17 @@ const icon = searchWrapper.querySelector(".icon");
 let linkTag = searchWrapper.querySelector("a");
 let webLink;
 
+// Import the suggestions array from your suggestion file
+import suggestions from '../js/suggestions.js'; // Adjust the path to your suggestion file
+
 inputBox.onkeyup = (e) => {
     let userData = e.target.value.toLowerCase();
     let emptyArray = [];
 
     if (userData.trim() !== "") {
+        // Filter suggestions based on user input (case-insensitive)
         emptyArray = suggestions.filter((data) => {
-            return data.toLowerCase().startsWith(userData);
+            return data.toLowerCase().includes(userData);
         });
 
         emptyArray = emptyArray.map((data) => {
@@ -25,7 +29,7 @@ inputBox.onkeyup = (e) => {
         let allList = suggBox.querySelectorAll("li");
         for (let i = 0; i < allList.length; i++) {
             allList[i].addEventListener("click", (e) => {
-                e.stopPropagation(); // Prevent the click event from propagating to the inputBox
+                e.stopPropagation();
                 select(allList[i].textContent);
             });
         }
@@ -40,18 +44,24 @@ inputBox.onkeyup = (e) => {
     }
 }
 
+icon.addEventListener("click", () => {
+    const userInput = inputBox.value.toLowerCase();
+    if (userInput.trim() !== "") {
+        select(userInput);
+    }
+});
+
 function select(elementText) {
     inputBox.value = elementText;
     searchWrapper.classList.remove("active");
 
-    // Show only the relevant card that matches the input
-    const userInput = inputBox.value.toLowerCase();
-    showMatchingCard(userInput);
+    // Get the target anchor tag with the matching data-card attribute
+    const userInput = elementText.toLowerCase();
+    const targetAnchor = document.querySelector(`a[data-card="${userInput}"]`);
 
-    // Scroll to the selected card
-    const selectedCard = document.getElementById(userInput);
-    if (selectedCard) {
-        selectedCard.scrollIntoView({ behavior: "smooth" });
+    if (targetAnchor) {
+        // Scroll to the target anchor tag's parent div
+        targetAnchor.parentElement.scrollIntoView({ behavior: "smooth" });
     } else {
         // If no matching card is found, scroll to the search icon
         icon.scrollIntoView({ behavior: "smooth" });
