@@ -8,20 +8,19 @@
   font-family: 'Poppins', sans-serif;
 }
 
-body{
-  background: rgba(255, 255, 255, 0.486);
-  padding: 0 20px;
-}
-
 body.container-fluid {
   max-width: 100%; /* Adjust the value as needed */
   overflow-x: hidden; /* Hide horizontal overflow if any */
 }
+body.container-fluid {
+  padding-left: 0;
+  padding-right: 0;
+}
 
-::selection{
+/* ::selection{
   color: #fff;
   background: #664AFF;
-}
+} */
 
 .wrapper{
   max-width: 550px;
@@ -92,7 +91,7 @@ body.container-fluid {
   text-align: center;
   line-height: 55px;
   font-size: 20px;
-  color: #644bff;
+  color:rgba(0,163,136,255);;
   cursor: pointer;
 }
 /* CSS for the "Search not found" message */
@@ -194,7 +193,8 @@ ul li ul li {
   color:rgba(0,163,136,255);
 }
 .bggreen{
-  background-color: rgba(0,163,136,255);;
+  background-color: rgba(0,163,136,255);
+
 }
 /* counter */
 .bg{
